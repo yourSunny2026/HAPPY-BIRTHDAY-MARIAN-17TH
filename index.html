@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Her Special Day 💕</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hearts {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 10;
+        }
+        .heart {
+            position: absolute; color: #ff69b4; font-size: 20px;
+            animation: float 6s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .container {
+            text-align: center; background: rgba(255,255,255,0.95);
+            padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 500px; width: 90%; z-index: 20;
+        }
+        h1 { font-size: 2.5rem; color: #ff6b6b; margin-bottom: 20px; }
+        input[type="date"] {
+            padding: 12px 20px; font-size: 1.1rem; border: 2px solid #ff9a9e;
+            border-radius: 10px; margin-right: 10px;
+        }
+        button {
+            background: #ff6b6b; color: white; border: none;
+            padding: 12px 30px; font-size: 1.1rem; border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover { background: #ff5252; transform: scale(1.05); }
+        .countdown {
+            display: flex; justify-content: space-around; flex-wrap: wrap; gap: 10px; margin-top: 30px;
+        }
+        .countdown-item {
+            background: white; padding: 20px; border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); flex: 1; min-width: 80px;
+        }
+        .countdown-item span {
+            display: block; font-size: 2.5rem; font-weight: bold; color: #ff6b6b; font-family: monospace;
+        }
+        .countdown-item p { margin: 5px 0 0; font-size: 0.9rem; color: #666; text-transform: uppercase; }
+        
+        /* FIXED POPUP STYLES */
+        .popup {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); background: linear-gradient(45deg, #ff69b4, #ff1493);
+            padding: 50px 30px; border-radius: 25px; text-align: center; z-index: 1000;
+            box-shadow: 0 0 100px rgba(255,105,180,0.8); border: 3px solid white;
+            min-width: 300px; animation: popupBounce 0.5s ease-out;
+        }
+        @keyframes popupBounce {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        .popup h1 { font-size: 2.5rem; color: white; margin: 0 0 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .popup p { font-size: 1.2rem; color: white; margin-bottom: 30px; }
+        .popup button {
+            background: #ffd700; color: #333; font-size: 1.3rem; padding: 15px 40px;
+            border-radius: 50px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .popup button:hover { background: #ffed4a; transform: scale(1.05); }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; } .countdown-item span { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <h1>🎂 HAPPY BIRTHDAY DARLING 💖</h1>
+        <div class="input-container" id="inputSection">
+            <input type="date" id="birthday-input">
+            <br><button id="start-countdown">Start Countdown</button>
+        </div>
+        <div id="countdown" class="countdown" style="display: none;">
+            <div class="countdown-item"><span id="days">00</span><p>Days</p></div>
+            <div class="countdown-item"><span id="hours">00</span><p>Hours</p></div>
+            <div class="countdown-item"><span id="minutes">00</span><p>Minutes</p></div>
+            <div class="countdown-item"><span id="seconds">00</span><p>Seconds</p></div>
+        </div>
+    </div>
+
+    <!-- FIXED POPUP -->
+    <div class="popup" id="popup">
+        <h1>Happy Birthday! 🎈🎂🎁</h1>
+        <p style="font-size: 1.5rem;">Surprise Awaits You My Love! 😍💕</p>
+       <button onclick="window.location.href='indexbi.html'">Open Gift 🎁</button>
+    </div>
+    <script>
+    alert('i am always try to give my best ');
+    alert('This website for you');
+    alert('I love you');
+    // AUTO-START: Set her birthday here (change date only!)
+    let birthdayTime = new Date('2026-02-16 00:00:00').getTime(); // YYYY-MM-DD her birthday
+    let countdownRunning = false;
+
+    window.addEventListener('load', function() {
+        document.getElementById('inputSection').style.display = 'none';
+        document.getElementById('countdown').style.display = 'flex';
+        launchHearts();
+        startCountdown();
+    });
+
+    function startCountdown() {
+        if (countdownRunning) return;
+        countdownRunning = true;
+        updateCountdown();
+    }
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = birthdayTime - now;
+
+        // ✅ FIXED: Popup triggers immediately when countdown finishes
+        if (timeLeft <= 0) {
+            document.getElementById('countdown').style.display = 'none';
+            document.getElementById('popup').style.display = 'block';
+            launchHearts();
+            return; // Stop countdown
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        
+        // Continue countdown every second
+        setTimeout(updateCountdown, 1000);
+    }
+
+    function launchHearts() {
+        const heartsContainer = document.getElementById('hearts');
+        const heartRain = setInterval(() => {
+            const heart = document.createElement('div');
+            heart.innerHTML = ['💕','💖','💗','💝','🌸'][Math.floor(Math.random()*5)];
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }, 200);
+        setTimeout(() => clearInterval(heartRain), 10000);
+    }
+
+    function openSurprise() {
+        window.location.href = 'birthday.html';
+    }
+</script>
+</body>
+</html>
