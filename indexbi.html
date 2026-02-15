@@ -214,50 +214,23 @@ document.addEventListener('click', function playMusic() {
         // Copy hearts/confetti JS from index.html
         // Auto launch hearts
     
-  //const modal = document.getElementById("imageModal");
- // const modalImg = document.getElementById("popupImg");
-//  const captionText = document.getElementById("caption");
-//  const images = document.querySelectorAll(".grid-img");
-
-//  images.forEach(img => {
-//    img.onclick = function(){
-//      modal.style.display = "block";
-//      modalImg.src = this.src;
-//      captionText.innerHTML = this.alt;
- //   }
-//  });
-
-//  document.querySelector(".close").onclick = function() {
-//    modal.style.display = "none";
-//  }
-const modal = document.getElementById("imageModal");
-const modalImg = document.getElementById("popupImg");
+  const modal = document.getElementById("imageModal");
+ const modalImg = document.getElementById("popupImg");
 const captionText = document.getElementById("caption");
+const images = document.querySelectorAll(".grid-img");
 
-// Select BOTH left and right grids
-const items = document.querySelectorAll(".grid-item");
-
-items.forEach(item => {
-  item.onclick = function() {
+images.forEach(img => {
+  img.onclick = function(){
     modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+   }
+ });
 
-    // If clicked item has image
-    const img = this.querySelector("img");
-    if (img) {
-      modalImg.src = img.src;
-      captionText.innerHTML = img.alt;
-    } else {
-      // If it's text card
-      modalImg.style.display = "none";
-      captionText.innerHTML = this.innerHTML;
-    }
-  }
-});
+ document.querySelector(".close").onclick = function() {
+    modal.style.display = "none";
+ }
 
-document.querySelector(".close").onclick = function() {
-  modal.style.display = "none";
-  modalImg.style.display = "block";
-}
         
     </script>
 </body>
