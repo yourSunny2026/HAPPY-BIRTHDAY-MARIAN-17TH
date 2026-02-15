@@ -47,6 +47,49 @@
         audio { width: 100%; margin: 20px auto; display: block; }
         @media (max-width: 768px) { .grids { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
         .floating-hearts { /* Similar to index */ }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 15px;
+  animation: zoom 0.3s;
+}
+
+@keyframes zoom {
+  from {transform: scale(0.7);}
+  to {transform: scale(1);}
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#caption {
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  font-size: 18px;
+}
+        
     </style>
 </head>
 <body>
@@ -131,7 +174,7 @@ My love for you is my first and last affec<br> I LOVE YOU MARIAN 💕</p></div>
         <div>
             <h2 style="text-align: center; color: #ff69b4;">YOUR SWEET MEMORIES 📸</h2>
             <div class="image-grid">
-                <div class="card image-card"><img src="1_2.jpeg" alt="Our Moment 1"><p>Your First Photo💖</p></div>
+                <div class="card grid-img image-card"><img src="1_2.jpeg" alt="Our Moment 1"><p>Your First Photo💖</p></div>
                 <div class="card image-card"><img src="1_7.jpg" alt="Our Moment 2"><p>Your Smile 😘</p></div>
                 <div class="card image-card"><img src="1_8.png" alt="Our Moment 3"><p>You are in indian red saree🌹</p></div>
                 <div class="card image-card"><img src="1_9.png" alt="Our Moment 4"><p>If you wear indian tredition clothes</p></div>
@@ -147,7 +190,12 @@ My love for you is my first and last affec<br> I LOVE YOU MARIAN 💕</p></div>
             </div>
         </div>
     </div>
-
+<!-- Popup Modal -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="popupImg">
+  <div id="caption"></div>
+</div>
     <script>
     let musicPlayed = false;
 
@@ -164,6 +212,23 @@ document.addEventListener('click', function playMusic() {
     // Plays only on FIRST click
         // Copy hearts/confetti JS from index.html
         // Auto launch hearts
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("popupImg");
+  const captionText = document.getElementById("caption");
+  const images = document.querySelectorAll(".grid-img");
+
+  images.forEach(img => {
+    img.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
+  });
+
+  document.querySelector(".close").onclick = function() {
+    modal.style.display = "none";
+  }
+        
     </script>
 </body>
 </html>
