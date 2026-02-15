@@ -174,18 +174,18 @@ My love for you is my first and last affec<br> I LOVE YOU MARIAN 💕</p></div>
         <div>
             <h2 style="text-align: center; color: #ff69b4;">YOUR SWEET MEMORIES 📸</h2>
             <div class="image-grid">
-                <div class="card image-card"><img src="1_2.jpeg" class="grid-img"alt="Our Moment 1"><p>Your First Photo💖</p></div>
-                <div class="card image-card"><img src="1_7.jpg" alt="Our Moment 2"><p>Your Smile 😘</p></div>
-                <div class="card image-card"><img src="1_8.png" alt="Our Moment 3"><p>You are in indian red saree🌹</p></div>
-                <div class="card image-card"><img src="1_9.png" alt="Our Moment 4"><p>If you wear indian tredition clothes</p></div>
-                <div class="card image-card"><img src="1_5.jpeg" alt="Our Moment 5"><p>When you cut your hair first time</p></div>
-                <div class="card image-card"><img src="1_1.jpeg" alt="Our Moment 6"><p>Your Reading Style 😘</p></div>
-                <div class="card image-card"><img src="1_13.jpg" alt="Our Moment 7"><p>Your favourite flowers</p></div>
-                <div class="card image-card"><img src="1_3.jpeg" alt="Our Moment 8"><p>Your crochet 🧶</p></div>
-                 <div class="card image-card"><img src="1_12.jpeg" alt="Our Moment 9"><p>This coffee i want to drink daily</p></div>
-                <div class="card image-card"><img src="1_10.jpeg" alt="Our Moment 10"><p>Your love for me ❤️</p></div>
-                <div class="card image-card"><img src="1_11.jpeg" alt="Our Moment 11"><p>When I first saw you in your school uniform</p></div>
-                <div class="card image-card"><img src="1_4.jpeg" alt="Our Moment 12"><p>I love This eyes 😊</p></div>
+                <div class="card image-card"><img src="1_2.jpeg" class="grid-img"alt="Your First Photo💖 "><p>Your First Photo💖</p></div>
+                <div class="card image-card"><img src="1_7.jpg" class="grid-img" alt="Your Smile 😘"><p>Your Smile 😘</p></div>
+                <div class="card image-card"><img src="1_8.png" class="grid-img" alt="You are in indian red saree🌹"><p>You are in indian red saree🌹</p></div>
+                <div class="card image-card"><img src="1_9.png"  class="grid-img" alt="If you wear indian tredition clothes"><p>If you wear indian tredition clothes</p></div>
+                <div class="card image-card"><img src="1_5.jpeg" class="grid-img"  alt="When you cut your hair first time"><p>When you cut your hair first time</p></div>
+                <div class="card image-card"><img src="1_1.jpeg" class="grid-img"  alt="Your Reading Style 😘"><p>Your Reading Style 😘</p></div>
+                <div class="card image-card"><img src="1_13.jpg" class="grid-img"  alt="Your favourite flowers"><p>Your favourite flowers</p></div>
+                <div class="card image-card"><img src="1_3.jpeg" class="grid-img"  alt="Your crochet 🧶"><p>Your crochet 🧶</p></div>
+                 <div class="card image-card"><img src="1_12.jpeg" class="grid-img"  alt="This coffee i want to drink daily><p>This coffee i want to drink daily</p></div>
+                <div class="card image-card"><img src="1_10.jpeg" class="grid-img"  alt="Your love for me ❤️"><p>Your love for me ❤️</p></div>
+                <div class="card image-card"><img src="1_11.jpeg"  class="grid-img" alt="When I first saw you in your school uniform"><p>When I first saw you in your school uniform</p></div>
+                <div class="card image-card"><img src="1_4.jpeg"  class="grid-img" alt="I love This eyes 😊"><p>I love This eyes 😊</p></div>
                 
             </div>
         </div>
@@ -212,22 +212,51 @@ document.addEventListener('click', function playMusic() {
     // Plays only on FIRST click
         // Copy hearts/confetti JS from index.html
         // Auto launch hearts
-  const modal = document.getElementById("imageModal");
-  const modalImg = document.getElementById("popupImg");
-  const captionText = document.getElementById("caption");
-  const images = document.querySelectorAll(".grid-img");
+    
+  //const modal = document.getElementById("imageModal");
+ // const modalImg = document.getElementById("popupImg");
+//  const captionText = document.getElementById("caption");
+//  const images = document.querySelectorAll(".grid-img");
 
-  images.forEach(img => {
-    img.onclick = function(){
-      modal.style.display = "block";
-      modalImg.src = this.src;
-      captionText.innerHTML = this.alt;
+//  images.forEach(img => {
+//    img.onclick = function(){
+//      modal.style.display = "block";
+//      modalImg.src = this.src;
+//      captionText.innerHTML = this.alt;
     }
   });
 
-  document.querySelector(".close").onclick = function() {
-    modal.style.display = "none";
+//  document.querySelector(".close").onclick = function() {
+//    modal.style.display = "none";
   }
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("popupImg");
+const captionText = document.getElementById("caption");
+
+// Select BOTH left and right grids
+const items = document.querySelectorAll(".grid-item");
+
+items.forEach(item => {
+  item.onclick = function() {
+    modal.style.display = "block";
+
+    // If clicked item has image
+    const img = this.querySelector("img");
+    if (img) {
+      modalImg.src = img.src;
+      captionText.innerHTML = img.alt;
+    } else {
+      // If it's text card
+      modalImg.style.display = "none";
+      captionText.innerHTML = this.innerHTML;
+    }
+  }
+});
+
+document.querySelector(".close").onclick = function() {
+  modal.style.display = "none";
+  modalImg.style.display = "block";
+}
         
     </script>
 </body>
